@@ -76,6 +76,17 @@ body {
     font-size: 1.8rem;
 }
 
+.logo-img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+.navbar.scrolled .logo-img {
+    filter: invert(1) brightness(1.2);
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
@@ -372,6 +383,13 @@ footer {
     font-size: 1.8rem;
 }
 
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: invert(1) brightness(1.2);
+}
+
 .footer-section ul {
     list-style: none;
 }
@@ -392,6 +410,49 @@ footer {
 
 .footer-section ul li a:hover {
     color: var(--accent-green);
+}
+
+.social-media {
+    margin-top: 1.5rem;
+}
+
+.social-media h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-green);
+    font-size: 1.1rem;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.social-icons a:hover {
+    color: var(--accent-green);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.social-icons a i {
+    font-size: 1.3rem;
+    width: 24px;
+    text-align: center;
+}
+
+.social-icons a span {
+    font-size: 0.95rem;
 }
 
 .footer-bottom {
@@ -913,5 +974,25 @@ footer {
 
     .btn {
         padding: 0.8rem 1.5rem;
+    }
+
+    .logo-img {
+        height: 28px;
+    }
+
+    .footer-logo-img {
+        height: 30px;
+    }
+
+    .social-icons {
+        gap: 0.5rem;
+    }
+
+    .social-icons a {
+        font-size: 0.9rem;
+    }
+
+    .social-icons a i {
+        font-size: 1.1rem;
     }
 }
