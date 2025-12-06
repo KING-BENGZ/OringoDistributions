@@ -60,12 +60,45 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    const categoryCards = document.querySelectorAll('.category-card');
-    categoryCards.forEach(card => {
-        card.addEventListener('click', () => {
-            window.location.href = 'products.html';
+    // Handle anchor links with smooth scroll offset for fixed navbar
+    document.querySelectorAll('a[href^="products.html#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.includes('#')) {
+                const hash = href.split('#')[1];
+                const targetElement = document.getElementById(hash);
+                if (targetElement) {
+                    e.preventDefault();
+                    const offset = 80; // Account for fixed navbar
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
     });
+    
+    // Handle hash on page load (for direct links)
+    if (window.location.hash) {
+        setTimeout(() => {
+            const hash = window.location.hash.substring(1);
+            const targetElement = document.getElementById(hash);
+            if (targetElement) {
+                const offset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
+    }
 
     const showAlcoholicBtn = document.getElementById('showAlcoholic');
     const ageModal = document.getElementById('ageModal');
@@ -114,18 +147,25 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                message: document.getElementById('message').value
-            };
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
 
-            console.log('Form submitted:', formData);
+            // Format message for WhatsApp
+            const whatsappMessage = `Hello, I'm interested in your product%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0APhone: ${encodeURIComponent(phone)}%0AMessage: ${encodeURIComponent(message)}`;
+            
+            // Create WhatsApp link
+            const whatsappLink = `https://wa.me/+2348100376038?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappLink, '_blank');
 
             contactForm.reset();
 
-            successModal.classList.add('active');
+            if (successModal) {
+                successModal.classList.add('active');
+            }
         });
     }
 
