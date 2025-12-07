@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ageModal.classList.remove('active');
             if (ageGate) ageGate.style.display = 'none';
             if (alcoholicSection) alcoholicSection.style.display = 'block';
+            const alcoholicBanner = document.getElementById('alcoholic-banner');
+            if (alcoholicBanner) alcoholicBanner.style.display = 'block';
 
             setTimeout(() => {
                 alcoholicSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
